@@ -202,17 +202,42 @@
         <p>Copyright &copy; 2020 - EdgeLedger</p>
     </footer>
 
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+
     <script>
         const navbar = document.getElementById('navbar');
+        let scrolled = false;
 
         window.onscroll = function() {
             console.log(window.pageYOffset);
             if(window.pageYOffset > 100 ) {
                 navbar.classList.remove('top');
+                if(!scrolled) {
+                    navbar.style.transform = 'translateY(-70px)';
+                }
             } else {
                 navbar.classList.add('top');
             }
         }
+
+        //Smooth Scrolling
+        $('#navbar a, .btn').on('click', function (e) {
+            if (this.hash !== '') {
+                e.preventDefault();
+                
+                const hash=this.hash;
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $(hash).offset().top-100,
+                    },
+                    800
+                );
+            }
+        });
     </script>
 </body>
 </html>
